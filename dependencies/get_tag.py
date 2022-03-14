@@ -49,9 +49,9 @@ def get_tag() -> str:
             )
 
         branch_tag_data: subprocess.CompletedProcess = subprocess.run(
-                ["git", "describe", "--tags", "--abbrev=0"],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
+            ["git", "describe", "--tags", "--abbrev=0"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
         )
 
         branch_tag = branch_tag_data.stdout.decode("utf8").strip()
