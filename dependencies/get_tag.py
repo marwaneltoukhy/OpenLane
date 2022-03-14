@@ -48,9 +48,16 @@ def get_tag() -> str:
                 f"Cannot determine git branch. Please specify OPENLANE_IMAGE_NAME manually.\nFull output: {branch_name_data.stderr.decode('utf8').strip()}"
             )
 
+        branch_tag_data: subprocess.CompletedProcess = subprocess.run(
+                ["git", "describe", "--tags", "--abbrev=0"],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+        )
+
+        branch_tag = branch_tag_data.stdout.decode("utf8").strip()
         branch_name = branch_name_data.stdout.decode("utf8").strip()
         if branch_name not in ["main", "master"]:
-            return f"{branch_name}-dev"
+            return f"{branch_tag}"
 
         process_data: subprocess.CompletedProcess = subprocess.run(
             ["git", "rev-parse", "HEAD"],
