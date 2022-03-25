@@ -44,7 +44,7 @@ proc run_yosys {args} {
     set ::env(synth_report_prefix) [index_file $::env(synthesis_reports)/synthesis]
 
     set ::env(LIB_SYNTH_COMPLETE_NO_PG) [list]
-    foreach lib $::env(LIB_SYNTH_COMPLETE) {
+    foreach lib $::env(LIB_SYNTH) {
         set fbasename [file rootname [file tail $lib]]
         set lib_path [index_file $::env(synthesis_tmpfiles)/$fbasename.no_pg.lib]
         convert_pg_pins $lib $lib_path
